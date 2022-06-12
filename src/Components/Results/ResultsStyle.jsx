@@ -20,7 +20,7 @@ cursor: pointer;
 `
     
 export const Img = styled.img`
-height: 80%;
+height: 4vw;
 border-radius: 100%;
 `
 

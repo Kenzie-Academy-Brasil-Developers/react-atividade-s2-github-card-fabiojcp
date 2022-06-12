@@ -28,6 +28,11 @@ export default function TypeSearch({
       ? page > 1 && setPage(page - 1)
       : page < amountResults && setPage(page + 1);
   }
+
+  function changeTyper(action) {
+    action === "users" ? setType("users") : setType("repositories");
+    action === "users" ? setData(users) : setData(repos);
+  }
   return (
     <DivMain>
       <DivSub>
@@ -55,7 +60,7 @@ export default function TypeSearch({
         </SelectAmount>
       </DivSub>
       <DivSub>
-        <BtnAmount onClick={() => setType("users")}>Usuários</BtnAmount>
+        <BtnAmount onClick={() => changeTyper("users")}>Usuários</BtnAmount>
         <Amount>
           {users.total_count < 1000
             ? users.total_count
@@ -65,9 +70,7 @@ export default function TypeSearch({
         </Amount>
       </DivSub>
       <DivSub>
-        <BtnAmount onClick={() => setType("repositories")}>
-          Repositórios
-        </BtnAmount>
+        <BtnAmount onClick={() => changeTyper("repos")}>Repositórios</BtnAmount>
         <Amount>
           {repos.total_count < 1000
             ? repos.total_count

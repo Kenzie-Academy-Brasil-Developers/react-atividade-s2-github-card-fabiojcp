@@ -20,7 +20,6 @@ export default function Home({
   created,
   owner,
 }) {
-  console.log(data);
   return (
     <>
       <Form onSubmit={(event) => handleSearch(event)}>

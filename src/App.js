@@ -14,20 +14,18 @@ export default function App() {
   const [type, setType] = useState("users");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [amountResults, setAmountResults] = useState(35);
-  const [created, setCreated] = useState({
-    created_at: "2022-06-11T03:30:00Z",
-  });
+  const [amountResults, setAmountResults] = useState(50);
+  const [created, setCreated] = useState({created_at: "2022-06-11T03:30:00Z"});
   const [owner, setOwner] = useState({
     owner: { login: "loading", html_url: "http://www.google.com" },
   });
-  
+
   function handleSearch(event) {
     event.preventDefault();
     setPage(1);
     setType("users");
     setAmountResults(35);
-    axios  
+    axios
       .get(
         BASE_URL +
           `search/users?q=${search}&page=${page}&per_page=${amountResults}`
@@ -48,19 +46,14 @@ export default function App() {
 
   useEffect(() => {
     axios
-    .get(
-      BASE_URL +
-        `search/${type}?q=${search}&page=${page}&per_page=${amountResults}`
-    )
-    .then((res) => {
-      setData(res.data);
-    });
-
-        //setData(() => {return type === "users" ? users : repos});
-        //setCreated(repos);
-        //setOwner(repos);
-
-  }, [axios, type, amountResults, page,]);
+      .get(
+        BASE_URL +
+          `search/${type}?q=${search}&page=${page}&per_page=${amountResults}`
+      )
+      .then((res) => {
+        setData(res.data);
+      });
+  }, [axios, amountResults, page]);
 
   // npm install @mui/material @emotion/react @emotion/styled
   return (
@@ -87,7 +80,7 @@ export default function App() {
             />
           }
         />
-        <Route path="/user/:user" element={<User />} />
+        <Route path="/:type/:user" element={<User />} />
         <Route path="/repos/:repo" element={<Repos />} />
       </Routes>
     </BrowserRouter>
